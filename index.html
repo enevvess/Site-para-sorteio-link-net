@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b2868" />
+  <title>Link Net Fibra | Sorteio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo-transparente.png" alt="Link Net Fibra" onerror="this.src='assets/logo.png'" />
+    </div>
+    <div class="top-actions">
+      <button id="settingsBtn" class="ghost-btn" type="button">⚙️ Configurar</button>
+      <button id="drawBtnTop" class="primary-btn" type="button">🎲 Realizar sorteio</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-wrap">
+      <img class="hero-banner" src="assets/banner-sorteio.png" alt="Sorteio Link Net Fibra: PS5 Slim + GTA VI mídia digital" />
+    </section>
+
+    <section class="info-grid" aria-label="Informações do sorteio">
+      <article class="info-card">
+        <span class="eyebrow">🏆 PRÊMIO</span>
+        <h1 id="prizeDisplay">PS5 Slim + GTA VI</h1>
+        <p id="descriptionDisplay">Participe do sorteio da Link Net Fibra e concorra a esse prêmio incrível!</p>
+      </article>
+      <article class="stats-card">
+        <span class="eyebrow">👥 PARTICIPANTES</span>
+        <strong id="participantCount">0</strong>
+        <span>nomes carregados</span>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">CENTRAL DO SORTEIO</span>
+          <h2>Participantes</h2>
+        </div>
+        <button id="clearBtn" class="text-btn" type="button">Limpar lista</button>
+      </div>
+
+      <div class="import-grid">
+        <label class="dropzone" id="dropzone">
+          <input id="fileInput" type="file" accept=".txt,.xlsx,.xls" hidden />
+          <div class="upload-icon">📥</div>
+          <strong>Importar participantes</strong>
+          <span>Arraste um arquivo aqui ou clique para selecionar</span>
+          <small>Formatos aceitos: TXT, XLSX e XLS</small>
+        </label>
+
+        <div class="manual-add">
+          <label for="nameInput">Adicionar nome manualmente</label>
+          <div class="manual-row">
+            <input id="nameInput" type="text" placeholder="Digite o nome do participante" maxlength="120" />
+            <button id="addNameBtn" class="secondary-btn" type="button">Adicionar</button>
+          </div>
+          <p class="helper">Em Excel, os nomes podem estar em qualquer coluna. Linhas vazias são ignoradas.</p>
+        </div>
+      </div>
+
+      <div class="file-status" id="fileStatus" aria-live="polite"></div>
+
+      <div class="participants-panel">
+        <div class="panel-top">
+          <input id="searchInput" type="search" placeholder="🔎 Buscar participante" />
+          <span id="visibleCount">0 exibidos</span>
+        </div>
+        <ol id="participantsList" class="participants-list"></ol>
+        <div id="emptyState" class="empty-state">
+          <div>🎟️</div>
+          <strong>Nenhum participante ainda</strong>
+          <span>Importe uma lista ou adicione nomes manualmente.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="drawModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <section class="draw-card" role="dialog" aria-modal="true" aria-labelledby="drawTitle">
+      <button id="closeModalBtn" class="close-btn" type="button" aria-label="Fechar">×</button>
+      <div class="draw-glow"></div>
+      <span class="eyebrow">🎉 SORTEANDO...</span>
+      <h2 id="drawTitle">Quem será o grande ganhador?</h2>
+      <div class="slot-window">
+        <div id="slotName" class="slot-name">Preparando...</div>
+      </div>
+      <div id="winnerReveal" class="winner-reveal" hidden>
+        <span>🏆 GANHADOR(A)</span>
+        <strong id="winnerName"></strong>
+      </div>
+      <div class="modal-actions">
+        <button id="startDrawBtn" class="primary-btn large" type="button">🎲 COMEÇAR SORTEIO</button>
+        <button id="drawAgainBtn" class="secondary-btn large" type="button" hidden>Sortear novamente</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="settingsModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop settings-backdrop"></div>
+    <section class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <button id="closeSettingsBtn" class="close-btn" type="button" aria-label="Fechar">×</button>
+      <span class="eyebrow">PERSONALIZAÇÃO</span>
+      <h2 id="settingsTitle">Configurar sorteio</h2>
+      <label>Título do prêmio<input id="prizeInput" value="PS5 Slim + GTA VI" maxlength="120" /></label>
+      <label>Descrição<textarea id="descriptionInput" maxlength="300">Participe do sorteio da Link Net Fibra e concorra a esse prêmio incrível!</textarea></label>
+      <label>Título da página<input id="pageTitleInput" value="Link Net Fibra | Sorteio" maxlength="120" /></label>
+      <button id="saveSettingsBtn" class="primary-btn" type="button">Salvar alterações</button>
+    </section>
+  </div>
+
+  <footer>© <span id="year"></span> Link Net Fibra • Sistema de sorteio</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
